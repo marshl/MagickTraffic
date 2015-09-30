@@ -134,6 +134,7 @@
     <ClCompile Include="traffic_automata.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="base_automata.h" />
     <ClInclude Include="traffic_automata.h" />
   </ItemGroup>
   <ItemGroup>

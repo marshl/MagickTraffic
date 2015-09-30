@@ -32,67 +32,6 @@ TrafficAutomata::~TrafficAutomata()
     //delete this->tempTable;
 }
 
-TrafficCell* TrafficAutomata::GetCell( int x, int y )
-{
-    return this->GetCellInTable( x, y, this->cellTable );
-}
-
-TrafficCell * TrafficAutomata::GetCellOffset( int x, int y, int xOffset, int yOffset )
-{
-    this->ApplyOffset( x, y, xOffset, yOffset );
-    return this->GetCell( x, y );
-}
-
-TrafficCell* TrafficAutomata::GetTempCell( int x, int y )
-{
-    return this->GetCellInTable( x, y, this->tempTable );;
-}
-
-TrafficCell * TrafficAutomata::GetTempCellOffset( int x, int y, int xOffset, int yOffset )
-{
-    this->ApplyOffset( x, y, xOffset, yOffset );
-    return this->GetTempCell( x, y );
-}
-
-TrafficCell* TrafficAutomata::GetCellInTable( int x, int y, std::vector<TrafficCell>& table )
-{
-    assert( x >= 0 );
-    assert( x < this->width );
-    assert( y >= 0 );
-    assert( y < this->height );
-
-    //return &table[y * this->width + x];
-    TrafficCell* cell = &table[y * this->width + x];
-    //assert( cell->x == x );
-    //assert( cell->y == y );
-    return cell;
-}
-
-void TrafficAutomata::ApplyOffset( int &x, int &y, int xOffset, int yOffset )
-{
-    x += xOffset;
-    y += yOffset;
-
-    while ( x < 0 )
-    {
-        x += this->width;
-    }
-
-    while ( x >= this->width )
-    {
-        x -= this->width;
-    }
-
-    while ( y < 0 )
-    {
-        y += this->height;
-    }
-
-    while ( y >= this->height )
-    {
-        y -= this->height;
-    }
-}
 
 void TrafficAutomata::Randomise( float ratio )
 {
@@ -104,14 +43,6 @@ void TrafficAutomata::Randomise( float ratio )
             bool occupied = (float)rand() / (float)RAND_MAX < ratio;
             c->direction = !occupied ? UNOCCUPIED : ( rand() % 2 ? VERTICAL : HORIZONTAL );
         }
-    }
-}
-
-void TrafficAutomata::Multistep( int steps )
-{
-    for ( int i = 0; i < steps; ++i )
-    {
-        this->Step();
     }
 }
 

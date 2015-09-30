@@ -37,10 +37,10 @@ int main( int argc, char* argv[] )
     std::vector<Image> frameList;
     for ( int i = 0; i < frameCount; ++i )
     {
-        Image blank_image( Geometry( tf.width, tf.height ), Color() );
-        for ( int y = 0; y < tf.height; ++y )
+        Image blank_image( Geometry( width, height ), Color() );
+        for ( int y = 0; y < height; ++y )
         {
-            for ( int x = 0; x < tf.width; ++x )
+            for ( int x = 0; x < width; ++x )
             {
                 TrafficCell* cell = tf.GetCell( x, y );
 

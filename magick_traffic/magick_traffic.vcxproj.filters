@@ -26,6 +26,9 @@
     <ClInclude Include="traffic_automata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="base_automata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

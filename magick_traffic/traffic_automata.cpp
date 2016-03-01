@@ -56,11 +56,11 @@ void TrafficAutomata::Step()
 
     //memset( this->tempTable, UNOCCUPIED, sizeof( TrafficCell ) );
 
-    for ( int x = this->width - 1; x >= 0; --x )
+    for ( int y = this->height - 1; y >= 0; --y )
     {
-        for ( int y = this->height - 1; y >= 0; --y )
+        for ( int x = this->width - 1; x >= 0; --x )
         {
-            const TrafficCell* cell = this->GetCell( x, y );
+            TrafficCell* cell = this->GetCell( x, y );
 
             //if ( !this->GetCell( x, y )->occupied )
             if ( cell->direction == UNOCCUPIED )
@@ -71,12 +71,12 @@ void TrafficAutomata::Step()
 
             if ( this->currentDirection == HORIZONTAL )
             {
-                TrafficCell* right = this->GetCellOffset( x, y, 1, 0 );
+                TrafficCell* right = this->GetCellToRight( x, y );// this->GetCellOffset( x, y, 1, 0 );
 
                 //if ( cell->occupied && cell->direction == HORIZONTAL && !right->occupied )
                 if ( cell->direction == HORIZONTAL && right->direction == UNOCCUPIED )
                 {
-                    TrafficCell* tempRight = this->GetTempCellOffset( x, y, 1, 0 );
+                    TrafficCell* tempRight = this->GetTempCellToRight( x, y );// this->GetTempCellOffset( x, y, 1, 0 );
                     //tempRight->occupied = true;
                     //tempRight->direction = HORIZONTAL;
                     *tempRight = *cell;
@@ -90,12 +90,12 @@ void TrafficAutomata::Step()
             }
             else if ( this->currentDirection == VERTICAL )
             {
-                TrafficCell* down = this->GetCellOffset( x, y, 0, 1 );
+                TrafficCell* down = this->GetCellBelow( x, y );// this->GetCellOffset( x, y, 0, 1 );
 
                 //if ( cell->occupied && cell->direction == VERTICAL && !down->occupied )
                 if ( cell->direction == VERTICAL && down->direction == UNOCCUPIED )
                 {
-                    TrafficCell* tempDown = this->GetTempCellOffset( x, y, 0, 1 );
+                    TrafficCell* tempDown = this->GetTempCellBelow( x, y );// this->GetTempCellOffset( x, y, 0, 1 );
                     //tempDown->occupied = true;
                     //tempDown->direction = VERTICAL;
                     *tempDown = *cell;

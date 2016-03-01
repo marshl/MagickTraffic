@@ -8,8 +8,6 @@ TrafficAutomata::TrafficAutomata( int width, int height )
 {
     this->width = width;
     this->height = height;
-    //this->cellTable = new TrafficCell[width * height];
-    //this->tempTable = new TrafficCell[width * height];
     this->cellTable.resize( width * height );
     this->tempTable.resize( width * height );
 
@@ -25,13 +23,6 @@ TrafficAutomata::TrafficAutomata( int width, int height )
         }
     }
 }
-
-TrafficAutomata::~TrafficAutomata()
-{
-    //delete this->cellTable;
-    //delete this->tempTable;
-}
-
 
 void TrafficAutomata::Randomise( float ratio )
 {
@@ -51,10 +42,7 @@ void TrafficAutomata::Step()
     for ( int i = 0; i < this->width * this->height; ++i )
     {
         this->tempTable[i].direction = UNOCCUPIED;
-        //this->tempTable[i].occupied = false;
     }
-
-    //memset( this->tempTable, UNOCCUPIED, sizeof( TrafficCell ) );
 
     for ( int y = this->height - 1; y >= 0; --y )
     {
@@ -62,7 +50,6 @@ void TrafficAutomata::Step()
         {
             TrafficCell* cell = this->GetCell( x, y );
 
-            //if ( !this->GetCell( x, y )->occupied )
             if ( cell->direction == UNOCCUPIED )
                 continue;
 
@@ -71,39 +58,29 @@ void TrafficAutomata::Step()
 
             if ( this->currentDirection == HORIZONTAL )
             {
-                TrafficCell* right = this->GetCellToRight( x, y );// this->GetCellOffset( x, y, 1, 0 );
+                TrafficCell* right = this->GetCellToRight( x, y );
 
-                //if ( cell->occupied && cell->direction == HORIZONTAL && !right->occupied )
                 if ( cell->direction == HORIZONTAL && right->direction == UNOCCUPIED )
                 {
-                    TrafficCell* tempRight = this->GetTempCellToRight( x, y );// this->GetTempCellOffset( x, y, 1, 0 );
-                    //tempRight->occupied = true;
-                    //tempRight->direction = HORIZONTAL;
+                    TrafficCell* tempRight = this->GetTempCellToRight( x, y );
                     *tempRight = *cell;
                 }
                 else
                 {
-                    //tempCell->occupied = cell->occupied;
-                    //tempCell->direction = cell->direction;
                     *tempCell = *cell;
                 }
             }
             else if ( this->currentDirection == VERTICAL )
             {
-                TrafficCell* down = this->GetCellBelow( x, y );// this->GetCellOffset( x, y, 0, 1 );
+                TrafficCell* down = this->GetCellBelow( x, y );
 
-                //if ( cell->occupied && cell->direction == VERTICAL && !down->occupied )
                 if ( cell->direction == VERTICAL && down->direction == UNOCCUPIED )
                 {
-                    TrafficCell* tempDown = this->GetTempCellBelow( x, y );// this->GetTempCellOffset( x, y, 0, 1 );
-                    //tempDown->occupied = true;
-                    //tempDown->direction = VERTICAL;
+                    TrafficCell* tempDown = this->GetTempCellBelow( x, y );
                     *tempDown = *cell;
                 }
                 else
                 {
-                    //tempCell->occupied = cell->occupied;
-                    //tempCell->direction = cell->direction;
                     *tempCell = *cell;
                 }
             }
@@ -111,11 +88,8 @@ void TrafficAutomata::Step()
     }
 
     this->currentDirection = ( this->currentDirection == HORIZONTAL ? VERTICAL : HORIZONTAL );
-    //memcpy( this->cellTable, this->tempTable, sizeof( TrafficCell ) * this->width * this->height );
     for ( int i = 0; i < this->width * this->height; ++i )
     {
         this->cellTable[i] = this->tempTable[i];
-        //this->cellTable[i].direction = this->tempTable[i].direction;
-        //this->cellTable[i].occupied = this->tempTable[i].occupied;
     }
 }

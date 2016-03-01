@@ -14,8 +14,6 @@ enum DIRECTION
 
 struct TrafficCell
 {
-    //bool occupied;
-    //Colour originalColour;
     DIRECTION direction;
     short originalX;
     short originalY;
@@ -25,8 +23,6 @@ class TrafficAutomata : public BaseAutomata<TrafficCell>
 {
 public:
     TrafficAutomata( int width, int height );
-
-    ~TrafficAutomata();
 
     void Randomise( float ratio );
 

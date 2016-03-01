@@ -19,7 +19,7 @@ int main( int argc, char* argv[] )
     system( "md output" );
 
     Image originalImage;
-    originalImage.read( "fivium.png" );
+    originalImage.read( "Animated_lights_on_the_Christmas_tree_part_1-512px.png" );
 
     TrafficAutomata tf( originalImage.columns(), originalImage.rows() );
     //TrafficAutomata tf( width, height );
@@ -58,9 +58,10 @@ int main( int argc, char* argv[] )
                 blank_image.pixelColor( x, y, c );
             }
         }
+
         if ( i > holdingFrames )
         {
-            tf.Multistep( 5 );
+            tf.Multistep( 50 );
         }
 
         char filename[255];

@@ -14,8 +14,6 @@ public:
 
     T* GetCell( int x, int y );
 
-    //T* GetCellOffset( int x, int y, int xOffset, int yOffset );
-
 protected:
     std::vector<T> tempTable;
     std::vector<T> cellTable;
@@ -31,11 +29,7 @@ protected:
     T* GetTempCellToRight( int x, int y );
     T* GetTempCellBelow( int x, int y );
 
-    //T* GetTempCellOffset( int x, int y, int xOffset, int yOffset );
-
     T* GetCellInTable( int x, int y, std::vector<T>& table );
-
-    //void ApplyOffset( int& x, int& y, int xOffset, int yOffset );
 };
 
 template<typename T>
@@ -77,28 +71,12 @@ T * BaseAutomata<T>::GetTempCellBelow( int x, int y )
     return this->GetCellInTable( x, y == this->height - 1 ? 0 : y + 1, this->tempTable );
 }
 
-/*
-template<typename T>
-T * BaseAutomata<T>::GetCellOffset( int x, int y, int xOffset, int yOffset )
-{
-    this->ApplyOffset( x, y, xOffset, yOffset );
-    return this->GetCell( x, y );
-}
-*/
 template<typename T>
 T * BaseAutomata<T>::GetTempCell( int x, int y )
 {
     return this->GetCellInTable( x, y, this->tempTable );;
 }
 
-/*
-template<typename T>
-T * BaseAutomata<T>::GetTempCellOffset( int x, int y, int xOffset, int yOffset )
-{
-    this->ApplyOffset( x, y, xOffset, yOffset );
-    return this->GetTempCell( x, y );
-}
-*/
 template<typename T>
 T * BaseAutomata<T>::GetCellInTable( int x, int y, std::vector<T>& table )
 {
@@ -109,34 +87,5 @@ T * BaseAutomata<T>::GetCellInTable( int x, int y, std::vector<T>& table )
 
     return &table[y * this->width + x];
 }
-
-/*
-template<typename T>
-void BaseAutomata<T>::ApplyOffset( int & x, int & y, int xOffset, int yOffset )
-{
-    x += xOffset;
-    y += yOffset;
-
-    while ( x < 0 )
-    {
-        x += this->width;
-    }
-
-    while ( x >= this->width )
-    {
-        x -= this->width;
-    }
-
-    while ( y < 0 )
-    {
-        y += this->height;
-    }
-
-    while ( y >= this->height )
-    {
-        y -= this->height;
-    }
-}
-*/
 
 #endif

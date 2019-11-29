@@ -7,29 +7,29 @@
 
 enum DIRECTION
 {
-    UNOCCUPIED,
-    VERTICAL,
-    HORIZONTAL,
+	UNOCCUPIED,
+	VERTICAL,
+	HORIZONTAL,
 };
 
 struct TrafficCell
 {
-    DIRECTION direction;
-    short originalX;
-    short originalY;
+	DIRECTION direction;
+	short originalX;
+	short originalY;
 };
 
 class TrafficAutomata : public BaseAutomata<TrafficCell>
 {
 public:
-    TrafficAutomata( int width, int height );
+	TrafficAutomata(int width, int height);
 
-    void Randomise( float ratio );
+	void Randomise(float ratio);
 
-    virtual void Step();
+	virtual void Step();
 
 private:
-    DIRECTION currentDirection;
+	DIRECTION currentDirection;
 };
 
 #endif
